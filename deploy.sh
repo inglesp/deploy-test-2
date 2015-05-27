@@ -8,6 +8,8 @@ if [[ $TRAVIS = "true" ]]; then
 		# configured via Travis web UI.
 		git config credential.helper "store --file=.git/credentials"
 		echo "https://inglesp:$GH_TOKEN@github.com" > .git/credentials
+		git config user.name "Travis"
+		git config user.email "travis@travis-ci.org"
 
 		# Add, commit, and push any changes to the output directory
 		# introduced by this change.  The output directory will have
