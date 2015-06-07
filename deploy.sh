@@ -4,6 +4,10 @@ if [[ $TRAVIS = "true" ]]; then
 	if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
 		echo "Deploying!"
 
+		echo "git log"
+		git log
+		echo "git logged"
+
 		# Set up credentials for pushing to GitHub.  $GH_TOKEN is
 		# configured via Travis web UI.
 		git config credential.helper "store --file=.git/credentials"
@@ -17,10 +21,15 @@ if [[ $TRAVIS = "true" ]]; then
 		# the output directory is already up to date then no new commit
 		# will be made.
 		git commit -a -m "Travis auto-commit.  Built latest changes."
+
+		echo "git log"
+		git log
+		echo "git logged"
+
 		git push https://inglesp@github.com/inglesp/deploy-test-2 master
 
 		# Push output directory to gh-pages branch on GitHub.
-		git subtree push --prefix output https://inglesp@github.com/inglesp/deploy-test-2 gh-pages
+		# git subtree push --prefix output https://inglesp@github.com/inglesp/deploy-test-2 gh-pages
 
 		# Clean up.
 		rm .git/credentials
