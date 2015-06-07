@@ -4,9 +4,8 @@ if [[ $TRAVIS = "true" ]]; then
 	if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
 		echo "Deploying!"
 
-		echo "git log"
-		git log
-		echo "git logged"
+		echo "Last log:"
+		git log -n 1 --parents
 
 		# Set up credentials for pushing to GitHub.  $GH_TOKEN is
 		# configured via Travis web UI.
@@ -20,13 +19,17 @@ if [[ $TRAVIS = "true" ]]; then
 		# been updated if required when pre-flight-checks.sh ran.  If
 		# the output directory is already up to date then no new commit
 		# will be made.
+		echo "Committing"
 		git commit -a -m "Travis auto-commit.  Built latest changes."
 
-		echo "git log"
-		git log
-		echo "git logged"
+		echo "Last log"
+		git log -n 1 --parents
 
-		git push https://inglesp@github.com/inglesp/deploy-test-2 master
+		# git push https://inglesp@github.com/inglesp/deploy-test-2 master
+
+		echo "Checking out master"
+		git checkout master
+		git log -n 3 --parents
 
 		# Push output directory to gh-pages branch on GitHub.
 		# git subtree push --prefix output https://inglesp@github.com/inglesp/deploy-test-2 gh-pages
