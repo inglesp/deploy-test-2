@@ -26,7 +26,7 @@ if [[ $TRAVIS = "true" ]]; then
 		git log -n 1 --parents
 
 		echo "Committing"
-		git commit -a -m "Travis auto-commit.  Built latest changes."
+		git commit -a -m "[skip ci] Travis auto-commit.  Built latest changes."
 
 		echo "Last log"
 		git log -n 1 --parents
@@ -35,7 +35,7 @@ if [[ $TRAVIS = "true" ]]; then
 		git push https://inglesp@github.com/inglesp/deploy-test-2 master
 
 		# Push output directory to gh-pages branch on GitHub.
-		# git subtree push --prefix output https://inglesp@github.com/inglesp/deploy-test-2 gh-pages
+		git subtree push --prefix output https://inglesp@github.com/inglesp/deploy-test-2 gh-pages
 
 		# Clean up.
 		rm .git/credentials
